@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/masuk_ke_form_login"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:id="@+id/tvLogin"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/buttonLogin"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/masuk_ke_form_daftar"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:id="@+id/tvDaftar"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/daftar"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/buttonDaftar"
+        />
+
+</RelativeLayout>
+package com.bolasinarmas.jawaban_uts_pemrograman_mobile_aldi_6a3_191103517;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText Username,Email,Password;
+    Button buttonLogin;
+    Button buttonDaftar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Username = findViewById(R.id.editUsername);
+        Password = findViewById(R.id.editPassword);
+        Email = findViewById(R.id.editEmail);
+        buttonLogin = findViewById(R.id.buttonLogin);
+        buttonDaftar = findViewById(R.id.buttonDaftar);
+
+        buttonLogin.setOnClickListener(view -> {
+            String usernamekey = Username.getText().toString();
+            String passwordkey = Password.getText().toString();
+
+            if(usernamekey.equals("AldiKancil2000") && passwordkey.equals("150220")){
+                //Jika login berhasil
+                Toast.makeText(getApplicationContext(), "Login Berhasil",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, form_login.class);
+                MainActivity.this.startActivity(intent);
+            } else{
+                //jika login gagal
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Username atau Password anda salah!")
+                        .setNegativeButton("silakan coba lagi",null).create().show();
+            }
+        });
+        buttonDaftar.setOnClickListener(view -> {
+            String usernamekey = Username.getText().toString();
+            String passwordkey = Password.getText().toString();
+            String emailkey = Email.getText().toString();
+
+            if(usernamekey.equals("AldiKancil2000") && passwordkey.equals("150220") && emailkey.equals("enricosuhanto@gmail.com") ){
+                //Jika daftar berhasil
+                Toast.makeText(getApplicationContext(), "Login Berhasil",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, Form_Daftar.class);
+                MainActivity.this.startActivity(intent);
+            } else{
+                //jika daftar gagal
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Email / Username atau Password anda salah!")
+                        .setNegativeButton("silakan coba lagi",null).create().show();
+            }
+        });
+    }
+
+}
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".form_login">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/form_login"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:id="@+id/tvLogin"/>
+
+    <EditText
+        android:id="@+id/editUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLogin"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="37dp"
+        android:ems="10"
+        android:hint="@string/masukkan_username"
+        android:inputType="textPersonName"
+        android:minHeight="40dp"
+        android:textColorHint="#757575"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editUsername"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:ems="10"
+        android:hint="@string/masukkan_sandi"
+        android:inputType="textPassword"
+        android:minHeight="40dp"
+        android:textColorHint="#757575"
+        android:autofillHints="" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:layout_below="@id/editPassword"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/buttonLogin"
+        />
+
+</RelativeLayout>
+package com.bolasinarmas.jawaban_uts_pemrograman_mobile_aldi_6a3_191103517;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class form_login extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_form_login);
+
+    }
+}
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Form_Daftar">
+
+    <TableRow
+        android:background="#1d71c4"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username"
+            android:textColor="#ffffff"
+            />
+        <EditText
+            android:id="@+id/editUsername"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:autofillHints=""
+            android:inputType="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textColor="#1d71c4"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:inputType="textEmailAddress"
+            android:autofillHints="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textColor="#1d71c4"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:inputType="textPassword"
+            android:autofillHints="" />
+    </TableRow>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/daftar"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/buttonDaftar"
+        />
+
+</RelativeLayout>
+package com.bolasinarmas.jawaban_uts_pemrograman_mobile_aldi_6a3_191103517;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class Form_Daftar extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_form_daftar);
+    }
+}
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profil">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_1"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"
+        android:src="@drawable/sangkancil"
+        android:contentDescription="@string/todo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/nama_enrico_aldi_suhanto"
+        android:background="#2559c2"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="25sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/alamat_parit_haji_husin_2"
+        android:background="#2559c2"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="25sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/username_aldikancil2000"
+        android:background="#2559c2"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="25sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/nim_191103517"
+        android:background="#2559c2"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="25sp"
+        />
+</RelativeLayout>
+package com.bolasinarmas.jawaban_uts_pemrograman_mobile_aldi_6a3_191103517;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class Profil extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profil);
+    }
+}
+<resources>
+    <string name="app_name">Jawaban_UTS_Pemrograman_Mobile_Aldi_6A3_191103517</string>
+    <string name="Username">Username</string>
+    <string name="Email">Email</string>
+    <string name="Password">Sandi</string>
+    <string name="masuk_ke_form_login">masuk ke form login</string>
+    <string name="masuk_ke_form_daftar">masuk ke form daftar</string>
+    <string name="todo">TODO</string>
+    <string name="nama_enrico_aldi_suhanto">Nama : Enrico Aldi Suhanto</string>
+    <string name="alamat_parit_haji_husin_2">Alamat : Parit Haji Husin 2</string>
+    <string name="username_aldikancil2000">Username : AldiKancil2000</string>
+    <string name="nim_191103517">Nim : 191103517</string>
+    <string name="username">username</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="daftar">Daftar</string>
+    <string name="form_login">form_login</string>
+    <string name="masukkan_username">Masukkan Username</string>
+    <string name="masukkan_sandi">Masukkan Sandi</string>
+    <string name="login">Login</string>
+</resources>
